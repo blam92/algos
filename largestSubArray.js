@@ -1,16 +1,16 @@
 let largestSubArray = (array) => {
-  let global = [array[0]];
+  let global = [0,0];
   let globalSum = array[0];
 
-  let current = [array[0]];
+  let current = [0,0];
   let currentSum = array[0];
 
   for(let i = 1; i < array.length; i++) {
     currentSum = Math.max(currentSum + array[i], array[i]);
     if(currentSum === array[i]) {
-      current = [array[i]];
+      current = [i, i];
     } else {
-      current.push(array[i]);
+      current[1] = i;
     }
 
     if(currentSum > globalSum) {
@@ -18,7 +18,7 @@ let largestSubArray = (array) => {
       global = [...current];
     }
   }
-  return global;
+  return array.slice(global[0], global[1] + 1);
 }
 
-console.log(largestSubArray([1, -3, 2, 1, -1]));
+console.log(largestSubArray([9, -3, 2, 2, -1]));
